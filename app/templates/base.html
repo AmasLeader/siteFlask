@@ -1,0 +1,84 @@
+<html>
+    <head>
+        <title>{{title}}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+        <style>
+            .bd-navbar {
+                position: sticky;
+                top: 0;
+                min-height: 4rem;
+                background-color: #bd0e38;
+                box-shadow: 0 0.5rem 1rem rgba(0,0,0,.05), inset 0 -1px 0 rgba(0,0,0,.1);
+            }
+            .btn-navbar {
+                margin-right: 1rem;
+                background-color: rgba(0,0,0,0);
+                border-color: rgba(255,255,255,0.3);
+            }
+            .btn-navbar:hover, .btn-navbar:focus, .btn-navbar:active, .btn-navbar.active, .open>.dropdown-toggle.btn-navbar {
+                color: #fff;
+                background-color: rgba(255,255,255,0.2);
+                border-color: rgba(255,255,255,0.4); /*set the color you want here*/
+            }
+
+            a:not(:hover) { color: inherit; } 
+
+            @media (min-width: 768px){
+                .bd-sidebar {
+                    position: sticky;
+                    top: 4rem;
+                    padding-top: 2rem;
+                    z-index: 1000;
+                    height: calc(100vh - 4rem);
+                    border-right: 1px solid rgba(0,0,0,.1);
+                }
+            }
+
+            @media (max-width: 767px){
+                .bd-sidebar {
+                    padding-top: 1rem;
+                    padding-bottom: 1rem;
+                    border-bottom: 1px solid rgba(0,0,0,.1);
+                }
+            }
+            
+        </style>
+    </head>
+    <body onresize="adjustGrid()">
+        <header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar">
+            <button type="button" class="btn btn-navbar" onclick="toggleSideBar()"><span class="navbar-toggler-icon"></span></button>
+            <a class="navbar-brand mr-0 mr-md-2" href="/" aria-label="Bootstrap"> Accueil</a>
+        </header>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 col-md-3 col-xl-2 bd-sidebar collapse show">
+                    <h3><a href="/">Accueil</a></h3>
+                    <a href="/cv">Curriculum</a><br>
+                    <a href="/hobby">Loisirs</a><br>
+                    <a href="/drawing">Dessins</a><br>
+                </div>
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </body>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script>
+        function toggleSideBar(){
+            $(".bd-sidebar").collapse('toggle');
+        }
+
+        function adjustGrid(){
+            var w = window.innerWidth;
+            var h = window.innerHeight;
+            if(w < 768){
+                $(".bd-sidebar").collapse('hide');
+            }
+            if(w >= 768){
+                $(".bd-sidebar").collapse('show');
+            }
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</html>
